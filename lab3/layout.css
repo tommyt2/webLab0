@@ -1,0 +1,83 @@
+body{
+	background-image:url("blueTextureBG.jpg");
+	margin-left:15%;
+	margin-right:15%;
+}
+
+.main_body{
+	border:10px dashed white;
+	background-color:white;
+	overflow:hidden;
+}
+
+
+.header{
+	background-color:#8E8E8E;
+	color:white;
+	padding:5px;
+}
+	
+h1{
+	text-align:center;
+}
+
+span{
+	font-weight:bold;
+}
+
+h2{
+	border-bottom:3px dotted white;
+	text-align:center;
+}
+
+
+#sidebar{
+	float:right;
+	width:150px;
+	height:auto;
+	margin-top:20px;
+	margin-left:10px;
+	border:4px solid #1D2475;
+	border-radius:15px;
+	background-color:#3366CC;
+}
+
+
+li a{
+	text-decoration:none;
+	color:orange;
+}
+
+li a:hover{
+	color:red;
+}
+
+#article{
+	width:auto;
+	margin:10px;
+	overflow:auto;
+}
+
+.section{
+	border:4px solid #1D2475;
+	border-radius:15px;
+	background-color:#6277C3;
+	color:#FFFFFF;
+	padding:5px;
+	margin-top:10px;
+	overflow:auto;
+}
+
+.style{
+	float:left;
+	background-color:white;
+	color:black;
+	margin:5px;
+	text-align:center;
+}
+
+.main_body  * *:not(.section):hover{
+	background-color:#ffff00
+}
+
+
