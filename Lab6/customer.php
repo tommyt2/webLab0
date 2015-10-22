@@ -45,7 +45,7 @@
 		<?php
 		# Ex 5 : 
 		# Check if the name is composed of alphabets, dash(-), ora single white space.
-		}elseif(!preg_match("/^[a-zA-Z(\s)?(-)?]+(-)?(\s)?[a-zA-Z(\s)?(-)?]*$/", $name) ){
+		}elseif(!preg_match("/^[a-zA-Z]+[a-zA-Z(\s)?(-)?]+(-)?(\s)?[a-zA-Z(\s)?(-)?]+[a-zA-Z]+$/", $name) ){
 		?>
 
 		<!-- Ex 5 : 
