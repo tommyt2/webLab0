@@ -1,0 +1,182 @@
+CREATE DATABASE College;
+USE College;
+
+//EX 1:CREATE DB AND TABLES
+
+CREATE TABLE student (
+	student_id INTEGER primary key not NULL ,
+	name VARCHAR(10) not NULL,
+	year SMALLINT not NULL DEFAULT '1',
+	dept_no INTEGER not NULL,
+	major VARCHAR(20) 
+);
+
+
+CREATE TABLE department (
+	dept_no integer primary key not null IDENTITY(1,1),
+	dept_name varchar(20) not null unique,
+	office varchar(20) not null,
+	office_tel varchar(13)
+);
+
+
+ALTER TABLE student ALTER column major varchar(40);
+
+ALTER TABLE student add gender varchar(10);
+
+ALTER TABLE department ALTER column dept_name varchar(40);
+
+ALTER TABLE department ALTER column office varchar(30);
+
+ALTER TABLE student drop column gender;
+
+
+//EX 2:INSERT DATA
+
+INSERT INTO student VALUES
+(20070002, 'James Bond', 3, 4, 'Business Administration'),
+(20060001, 'Queenie', 4, 4, 'Business Administration'),
+(20030001, 'Reonardo', 4, 2, 'Electronic Engineering'),
+(20040003, 'Julia', 3, 2, 'Electronic Engineering'),
+(20060002, 'Roosevelt', 3, 1, 'Computer Science'),
+(20100002, 'Fearne', 3, 4, 'Business Administration'),
+(20110001, 'Chloe', 2, 1, 'Computer Science'),
+(20080003, 'Amy', 4, 3, 'Law'),
+(20040002, 'Selina', 4, 5, 'English Literature'),
+(20070001, 'Ellen', 4, 4, 'Business Administration'),
+(20100001, 'Kathy', 3, 4, 'Business Administration'),
+(20110002, 'Lucy', 2, 2, 'Electronic Engineering'),
+(20030002, 'Michelle', 5, 1, 'Computer Science'),
+(20070003, 'April', 4, 3, 'Law'),
+(20070005, 'Alicia', 2, 5, 'English Literature'),
+(20100003, 'Yullia', 3, 1, 'Computer Science'),
+(20070007, 'Ashlee', 2, 4, 'Business Administration')
+
+INSERT INTO department (dept_no,dept_name, office, office_tel)
+VALUES ('1','Computer Science', 'Engineering building', '02-3290-0123'),
+('2','Electronic Engineering', 'Engineering building', '02-3290-2345'),
+('3','Law', 'Law building', '02-3290-7896'),
+('4','Business Administration', 'Administration building', '02-3290-1112'),
+('5','English Literature', 'Literature building', '02-3290-4412')
+
+EX 3: UPDATE AND DELETE
+
+UPDATE department set dept_name='Electronic and Electrical Engineering'
+where dept_name='Electronic Engineering';
+
+INSERT INTO department(dept_no,dept_name,office,office_tel)
+VALUES('6','Education', 'Education building', '02-3290-2347');
+
+INSERT INTO student VALUES(20130003, 'Chloe', 1, 6, 'Education');
+
+DELETE FROM student WHERE name = 'Michelle';
+DELETE FROM student WHERE name = 'Fearne';
+
+EX 4:
+
+SELECT * FROM student 
+WHERE major = 'Computer Science';
+
+SELECT student_id, year, major 
+FROM student;
+
+SELECT * FROM student 
+WHERE year = 3;
+
+SELECT * FROM student 
+WHERE year = 1 or year = 2;
+
+SELECT * FROM student s 
+JOIN department d ON s.dept_no=d.dept_no 
+WHERE dept_name='Business Administration';
+
+EX 5:
+
+SELECT * FROM student 
+WHERE student_id like '2007%';
+
+SELECT * FROM student 
+ORDER BY student_id;
+
+SELECT major
+FROM student 
+GROUP BY major 
+HAVING avg(year) > 3;
+
+SELECT TOP 2 * FROM student 
+WHERE major='Business Administration' 
+AND student_id like '2007%';
+
+
+EX 6: Multi-table query-imdb DB
+
+SELECT * FROM roles r
+JOIN movies m ON r.movie_id = m.id
+WHERE m.name = 'Pi';
+
+SELECT a.first_name, a.last_name ,r.role
+FROM actors a
+JOIN roles r ON a.id=r.actor_id
+JOIN movies m ON r.movie_id=m.id
+WHERE m.name='Pi';
+
+SELECT a.first_name, a.last_name 
+FROM actors a
+JOIN roles r ON a.id=r.actor_id
+JOIN movies m ON r.movie_id=m.id 
+WHERE m.name LIKE "Kill Bill: Vol. 1"
+OR m.name LIKE "Kill Bill: Vol. 2"
+GROUP BY a.id
+HAVING COUNT(*)=2;
+
+SELECT TOP 7 a.first_name,a.last_name, COUNT(r.movie_id) as number_of_movies 
+FROM actors a
+JOIN roles r ON a.id=r.actor_id
+GROUP BY a.id
+ORDER BY COUNT(r.movie_id) DESC;
+
+SELECT g.genre, COUNT(g.genre) 
+FROM movies_genres g
+JOIN movies m ON g.movie_id=m.id
+GROUP BY g.genre
+ORDER BY COUNT(g.genre) DESC;
+
+SELECT TOP 1 d.first_name, d.last_name, COUNT(d.id) 
+FROM directors d
+JOIN movies_directors md ON d.id=md.director_id
+JOIN movies_genres g ON md.movie_id=g.movie_id 
+WHERE g.genre="Thriller"
+GROUP BY d.id
+ORDER BY COUNT(d.id) DESC;
+
+
+EX 7: Multi-table query-simpsons DB
+
+SELECT * FROM grades g
+JOIN courses c on g.course_id=c.id
+WHERE c.name="Computer Science 143";
+
+SELECT s.name, g.grade 
+FROM students s
+JOIN grades g ON g.student_id=s.id
+JOIN courses c on g.course_id=c.id
+WHERE c.name="Computer Science 143"
+AND g.grade LIKE 'B%' OR g.grade LIKE 'A%';
+
+SELECT s.name, c.name, g.grade 
+FROM students s
+JOIN grades g ON s.id=g.student_id
+JOIN courses c on g.course_id=c.id
+WHERE g.grade LIKE 'A%' OR g.grade LIKE 'B%';
+
+SELECT c.name 
+FROM courses c
+JOIN grades g ON c.id=g.course_id
+JOIN students s ON s.id=g.student_id
+GROUP BY c.id
+HAVING COUNT(s.id)>=2;
+
+EX 8:
+
+
+

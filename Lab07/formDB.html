@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Query</title>
+		<link href="http://selab.hanyang.ac.kr/courses/cse326/2015/problems/pResources/gradestore.css" type="text/css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<h1>Query</h1>
+
+		<p>
+			Please enter Database name and SQL Query below.
+		</p>
+		
+		<hr />
+		<form action="sql.php" method="post">
+		<div>
+		Database:<input type="text" name="dbname" />
+		</div>
+		<div>
+		Query:
+		<textarea name="query" rows=3 cols=70/></textarea>
+		</div>
+	
+		<div id="submitButton">
+			<input type="submit" value="Execute" />
+		</div>
+	
+		</form>
+
+	</body>
+</html>
